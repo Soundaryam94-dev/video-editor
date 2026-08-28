@@ -1,0 +1,358 @@
+.panel {
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 8px;
+  flex-shrink: 0;
+}
+.title { font-size: 12px; font-weight: 700; }
+
+.clear {
+  font-size: 11px;
+  color: var(--accent);
+  cursor: pointer;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.12s;
+}
+.clear:hover:not(:disabled) { background: var(--accent-dim); }
+.clearDisabled {
+  color: var(--text-muted) !important;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.clearWrap {
+  position: relative;
+}
+
+.confirmPopup {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 200;
+  background: var(--surface-2, #2a2a3a);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  min-width: 200px;
+  white-space: nowrap;
+}
+
+.confirmMsg {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0 0 10px;
+  text-align: center;
+}
+
+.confirmBtns {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.confirmYes {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background: var(--accent);
+  color: #fff;
+  transition: opacity 0.12s;
+}
+.confirmYes:hover { opacity: 0.85; }
+
+.confirmNo {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 14px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: background 0.12s;
+}
+.confirmNo:hover { background: var(--surface-3, #333348); }
+
+.tabs { display: flex; padding: 0 10px 8px; gap: 2px; flex-shrink: 0; }
+.tab {
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.tab:hover { color: var(--text-secondary); }
+.activeTab { color: var(--accent); background: var(--accent-dim); }
+
+.body {
+  padding: 0 14px 14px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.placeholder {
+  padding: 20px 0;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  color: var(--text-muted);
+  font-size: 10px;
+}
+.sectionTitle { font-size: 11.5px; font-weight: 600; color: var(--text-primary); }
+.sectionArrow  { font-size: 10px; color: var(--text-muted); }
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 0;
+}
+.label { font-size: 11px; color: var(--text-secondary); min-width: 55px; flex-shrink: 0; }
+.value { font-size: 11px; font-weight: 500; min-width: 36px; text-align: right; color: var(--text-secondary); }
+
+.slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  background: linear-gradient(to right, var(--accent) var(--val, 50%), var(--bg-active) var(--val, 50%));
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  min-width: 0;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px; height: 12px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--accent), 0 2px 6px rgba(0,0,0,0.4);
+}
+.slider::-moz-range-thumb {
+  width: 12px; height: 12px;
+  background: white;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 0 0 2px var(--accent), 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.xyWrap { display: flex; gap: 6px; flex: 1; min-width: 0; }
+.xyInput {
+  display: flex; align-items: center; gap: 4px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 3px 7px;
+  flex: 1;
+  font-size: 11px;
+  min-width: 0;
+}
+.xyInput:focus-within { border-color: var(--accent); }
+.xyLabel { font-size: 10px; color: var(--text-muted); font-weight: 600; flex-shrink: 0; }
+.xyNum {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 11px;
+  width: 100%;
+  min-width: 0;
+  text-align: right;
+}
+
+/* ── Accordion ── */
+.accordion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-top: 1px solid var(--border-subtle);
+  cursor: pointer;
+  background: transparent;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  width: 100%;
+  text-align: left;
+}
+.accordion:hover .accordionLabel { color: var(--text-primary); }
+
+.accordionLabel { font-size: 11.5px; font-weight: 600; color: var(--text-secondary); }
+.accordionDirty .accordionLabel { color: var(--accent); }
+
+.accordionArrow {
+  font-size: 10px;
+  color: var(--text-muted);
+  transition: transform 0.15s;
+  display: inline-block;
+}
+.accordionArrowOpen { transform: rotate(180deg); }
+
+.accordionContent {
+  padding-bottom: 4px;
+}
+
+/* ── Keyframe button ── */
+.kfSpacer { width: 14px; flex-shrink: 0; }
+
+.kfBtn {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 8px;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.35;
+  transition: opacity 0.15s, color 0.15s;
+}
+.kfBtn:hover { opacity: 0.7; }
+.kfEnabled { opacity: 0.6; color: #f59e0b; }
+.kfActive  { opacity: 1 !important; color: #f59e0b; }
+
+/* ── Keyframe strip ── */
+.kfStrip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0 6px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 4px;
+}
+.kfStripLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  width: 55px;
+  padding-left: 20px;
+}
+.kfStripTrack {
+  flex: 1;
+  height: 12px;
+  background: var(--bg-elevated);
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+.kfDot {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 6px;
+  height: 6px;
+  background: #f59e0b;
+  border-radius: 1px;
+  cursor: pointer;
+}
+
+/* ── Blend mode select ── */
+.blendSelect {
+  flex: 1;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 11px;
+  padding: 4px 6px;
+  cursor: pointer;
+  outline: none;
+}
+.blendSelect:focus { border-color: var(--accent); }
+
+/* ── Adjustment layer badge ── */
+.adjBadge {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 5px 0 8px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 4px;
+}
+
+/* ── Caption properties ── */
+.captionProps { padding: 2px 0; }
+
+.captionTextRow { align-items: flex-start; }
+
+.captionTextarea {
+  flex: 1;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 12px;
+  padding: 6px 8px;
+  resize: vertical;
+  outline: none;
+  font-family: inherit;
+  line-height: 1.5;
+  min-height: 56px;
+}
+.captionTextarea:focus { border-color: var(--accent); }
+
+.colorInput {
+  width: 26px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.alignBtns { display: flex; gap: 3px; }
+
+.alignBtn {
+  font-size: 10px;
+  font-weight: 600;
+  width: 22px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.12s;
+  display: flex; align-items: center; justify-content: center;
+}
+.alignBtn:hover { color: var(--text-primary); }
+.alignBtnActive { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }

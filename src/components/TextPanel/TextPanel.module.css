@@ -1,0 +1,626 @@
+/* ── Panel shell ──────────────────────────────────────────────────────────── */
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-surface);
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.header {
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.headerTitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+.addBtn svg { width: 11px; height: 11px; flex-shrink: 0; }
+.addBtn:hover { background: var(--accent-hover); }
+
+/* ── Clip list ────────────────────────────────────────────────────────────── */
+.clipListWrap {
+  flex-shrink: 0;
+  max-height: 140px;
+  overflow-y: auto;
+  border-bottom: 1px solid var(--border);
+}
+.clipListWrap::-webkit-scrollbar { width: 4px; }
+.clipListWrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  gap: 6px;
+}
+.emptyIcon { color: rgba(255,255,255,0.12); }
+.emptyTitle {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.25);
+}
+.emptyHint {
+  font-size: 11px;
+  color: rgba(255,255,255,0.15);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.clipList { padding: 4px; display: flex; flex-direction: column; gap: 2px; }
+
+.clipItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s, border-color 0.1s;
+}
+.clipItem:hover { background: var(--bg-hover); }
+.clipItemSel {
+  background: rgba(108,99,255,0.12) !important;
+  border-color: rgba(108,99,255,0.35) !important;
+}
+
+.clipPreviewText {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+.clipMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  gap: 1px;
+}
+.clipName {
+  font-size: 10px;
+  color: var(--text-muted);
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.clipDur {
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+/* ── Editor section ───────────────────────────────────────────────────────── */
+.editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-top: 1px solid var(--border);
+}
+
+.editorTabs {
+  display: flex;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 0 8px;
+  gap: 2px;
+}
+
+.editorTab {
+  flex: 1;
+  padding: 8px 6px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: color 0.13s, border-color 0.13s;
+  text-transform: capitalize;
+}
+.editorTab:hover { color: var(--text-secondary); }
+.editorTabActive {
+  color: var(--accent) !important;
+  border-bottom-color: var(--accent) !important;
+}
+
+.editorScroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.editorScroll::-webkit-scrollbar { width: 4px; }
+.editorScroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ── Tab content ──────────────────────────────────────────────────────────── */
+.tabContent {
+  padding: 4px 0 12px;
+}
+
+/* ── Sections ─────────────────────────────────────────────────────────────── */
+.section {
+  border-bottom: 1px solid var(--border-subtle);
+}
+.section:last-child { border-bottom: none; }
+
+.sectionHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.sectionHeader:hover { background: var(--bg-hover); }
+.sectionHeader svg { flex-shrink: 0; opacity: 0.5; width: 8px; height: 5px; }
+
+.sectionTitle {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.sectionBody {
+  padding: 6px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Textarea ─────────────────────────────────────────────────────────────── */
+.textArea {
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 8px 10px;
+  resize: vertical;
+  min-height: 60px;
+  transition: border-color 0.13s;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+.textArea:focus { outline: none; border-color: var(--accent); }
+
+/* ── Font select ──────────────────────────────────────────────────────────── */
+.selectWrap {
+  position: relative;
+  width: 100%;
+}
+.select {
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 7px 28px 7px 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: border-color 0.13s;
+  box-sizing: border-box;
+}
+.select:focus { outline: none; border-color: var(--accent); }
+.select option { font-size: 13px; }
+.selectCaret {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.5;
+  width: 8px;
+  height: 5px;
+}
+
+/* ── Font row (size + B/I/U) ──────────────────────────────────────────────── */
+.fontRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sizeWrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.numLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 28px;
+}
+
+.sizeInput {
+  width: 56px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--text-primary);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  padding: 5px 7px;
+  text-align: center;
+  transition: border-color 0.13s;
+}
+.sizeInput:focus { outline: none; border-color: var(--accent); }
+.sizeInput::-webkit-inner-spin-button { opacity: 0.5; }
+
+.styleButtons {
+  display: flex;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.styleBtn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+}
+.styleBtn:hover { background: var(--bg-hover); color: var(--text-primary); }
+.styleBtnActive {
+  background: rgba(108,99,255,0.15) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+/* ── Alignment ────────────────────────────────────────────────────────────── */
+.alignRow {
+  display: flex;
+  gap: 4px;
+}
+.alignBtn {
+  flex: 1;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+}
+.alignBtn svg { width: 14px; height: 14px; }
+.alignBtn:hover { background: var(--bg-hover); color: var(--text-primary); }
+.alignBtnActive {
+  background: rgba(108,99,255,0.15) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+/* ── Color + opacity row ──────────────────────────────────────────────────── */
+.colorOpacityRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.colorField, .opacityField {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 1;
+}
+.fieldLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.colorSwatchWrap { position: relative; }
+.colorSwatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s;
+  flex-shrink: 0;
+}
+.colorSwatch:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 2px rgba(108,99,255,0.4);
+}
+.colorInput {
+  position: absolute;
+  width: 0; height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Toggle row ───────────────────────────────────────────────────────────── */
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Toggle switch ────────────────────────────────────────────────────────── */
+.toggle { display: inline-flex; cursor: pointer; }
+.toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.toggleTrack {
+  position: relative;
+  width: 32px;
+  height: 18px;
+  background: var(--bg-active);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.toggle input:checked ~ .toggleTrack {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.toggleThumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  transition: transform 0.15s, background 0.15s;
+}
+.toggle input:checked ~ .toggleTrack .toggleThumb {
+  transform: translateX(14px);
+  background: #fff;
+}
+
+/* ── Slider row ───────────────────────────────────────────────────────────── */
+.sliderRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sliderLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  width: 42px;
+  flex-shrink: 0;
+}
+.slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 99px;
+  background: linear-gradient(
+    to right,
+    var(--accent) var(--val),
+    rgba(255,255,255,0.1) var(--val)
+  );
+  outline: none;
+  cursor: pointer;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 2px var(--accent), 0 2px 4px rgba(0,0,0,0.4);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+.slider::-moz-range-thumb {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--accent);
+  cursor: pointer;
+}
+.sliderVal {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+  width: 38px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ── Numeric input ────────────────────────────────────────────────────────── */
+.numRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.numWrap {
+  display: flex;
+  align-items: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+  flex: 1;
+}
+.numInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  padding: 5px 7px;
+  text-align: center;
+  min-width: 0;
+}
+.numInput:focus { outline: none; }
+.numInput::-webkit-inner-spin-button { opacity: 0.4; }
+.numUnit {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  padding-right: 7px;
+  flex-shrink: 0;
+}
+
+/* ── Two-column grid ──────────────────────────────────────────────────────── */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+/* ── Misc color row ───────────────────────────────────────────────────────── */
+.colorRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.colorLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  min-width: 36px;
+}
+
+/* ── Motion preset grid ───────────────────────────────────────────────────── */
+.motionGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  margin-bottom: 6px;
+}
+
+.motionPreset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 7px 4px 5px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.motionPreset svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.motionPreset:hover {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+}
+.motionPresetActive {
+  background: var(--accent-dim) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+.motionLabel {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  text-align: center;
+}
+
+/* ── Timing row ───────────────────────────────────────────────────────────── */
+.timingRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+}
+.timingDisplay {
+  flex: 1;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  padding: 4px 8px;
+  text-align: left;
+  cursor: text;
+  transition: border-color 0.12s;
+}
+.timingDisplay:hover { border-color: var(--accent); }
+.timingEdit {
+  flex: 1;
+  background: var(--bg-elevated);
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  outline: none;
+  font-variant-numeric: tabular-nums;
+}
+.timingReadonly {
+  flex: 1;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  padding: 4px 0;
+}

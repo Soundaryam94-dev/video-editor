@@ -1,0 +1,133 @@
+.mixer {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  z-index: 200;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  min-width: 200px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 4px;
+  line-height: 1;
+}
+.close:hover { background: var(--bg-hover); color: var(--text-primary); }
+
+.tracks {
+  display: flex;
+  gap: 16px;
+}
+
+.track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 48px;
+  opacity: 1;
+  transition: opacity 0.15s;
+}
+.trackMuted { opacity: 0.4; }
+
+.faderWrap {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  height: 100px;
+}
+
+.faderScale {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.scaleMark {
+  font-size: 9px;
+  color: var(--text-muted);
+  line-height: 1;
+  text-align: right;
+  width: 18px;
+}
+
+.fader {
+  -webkit-appearance: slider-vertical;
+  appearance: slider-vertical;
+  writing-mode: vertical-lr;
+  direction: rtl;
+  width: 22px;
+  height: 100px;
+  cursor: pointer;
+  accent-color: var(--color, #22c55e);
+}
+
+.trackInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.db {
+  font-size: 9px;
+  color: var(--text-muted);
+  font-family: monospace;
+}
+
+.pct {
+  font-size: 10px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.muteBtn {
+  width: 28px;
+  height: 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.muteBtn:hover { background: var(--bg-hover); }
+.muteBtnActive {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: white;
+}
+
+.trackLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}

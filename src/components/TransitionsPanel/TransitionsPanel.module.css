@@ -1,0 +1,379 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg-surface);
+  overflow: hidden;
+}
+
+.header {
+  padding: 14px 14px 0;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+}
+
+.hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 6px 14px 10px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Grid ─────────────────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 0 10px;
+  overflow-y: auto;
+  flex: 1;
+}
+.grid::-webkit-scrollbar { width: 4px; }
+.grid::-webkit-scrollbar-track { background: transparent; }
+.grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* ── Card ─────────────────────────────────────────────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 4px 7px;
+  background: var(--bg-elevated);
+  border: 1.5px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  position: relative;
+}
+.card:hover { border-color: rgba(108,99,255,0.4); background: rgba(108,99,255,0.07); }
+.cardActive { border-color: var(--accent) !important; background: rgba(108,99,255,0.12) !important; }
+.cardDim { opacity: 0.45; }
+
+.cardLabel {
+  font-size: 9.5px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.2;
+  pointer-events: none;
+}
+.cardActive .cardLabel { color: var(--accent); }
+
+.cardCheck {
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* ── Preview box ──────────────────────────────────────────────────────── */
+.preview {
+  width: 52px;
+  height: 34px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.previewA,
+.previewB {
+  position: absolute;
+  inset: 0;
+}
+.previewA { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+.previewB { background: linear-gradient(135deg, #0284c7, #0ea5e9); }
+.previewBlack {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── none: static hard cut ───────────────────────────────────────────── */
+.prev_none .previewB {
+  clip-path: inset(0 0 0 50%);
+  border-left: 1px solid rgba(255,255,255,0.25);
+}
+
+/* ── dissolve ────────────────────────────────────────────────────────── */
+.prev_dissolve .previewB {
+  opacity: 0;
+  animation: tpDissolveBIn 3s ease-in-out infinite;
+}
+.prev_dissolve .previewA {
+  animation: tpDissolveAOut 3s ease-in-out infinite;
+}
+@keyframes tpDissolveBIn {
+  0%,  20% { opacity: 0; }
+  45%, 65% { opacity: 1; }
+  80%      { opacity: 1; }
+  100%     { opacity: 0; }
+}
+@keyframes tpDissolveAOut {
+  0%,  20% { opacity: 1; }
+  45%, 65% { opacity: 0; }
+  80%      { opacity: 0; }
+  100%     { opacity: 1; }
+}
+
+/* ── fadeBlack ───────────────────────────────────────────────────────── */
+.prev_fadeBlack .previewA {
+  animation: tpFadeBlkA 3s ease-in-out infinite;
+}
+.prev_fadeBlack .previewB {
+  opacity: 0;
+  animation: tpFadeBlkB 3s ease-in-out infinite;
+}
+.prev_fadeBlack .previewBlack {
+  animation: tpFadeBlkOverlay 3s ease-in-out infinite;
+}
+@keyframes tpFadeBlkA {
+  0%,  22% { opacity: 1; }
+  38%, 68% { opacity: 0; }
+  88%      { opacity: 0; }
+  100%     { opacity: 1; }
+}
+@keyframes tpFadeBlkB {
+  0%,  42% { opacity: 0; }
+  58%, 80% { opacity: 1; }
+  90%      { opacity: 1; }
+  100%     { opacity: 0; }
+}
+@keyframes tpFadeBlkOverlay {
+  0%,  20% { opacity: 0; }
+  33%, 48% { opacity: 1; }
+  62%, 100%{ opacity: 0; }
+}
+
+/* ── slideLeft (B enters from right) ────────────────────────────────── */
+.prev_slideLeft .previewA {
+  animation: tpSlideLeftA 3s ease-in-out infinite;
+}
+.prev_slideLeft .previewB {
+  transform: translateX(100%);
+  animation: tpSlideLeftB 3s ease-in-out infinite;
+}
+@keyframes tpSlideLeftA {
+  0%,  15% { transform: translateX(0); }
+  50%, 75% { transform: translateX(-100%); }
+  90%      { transform: translateX(-100%); }
+  100%     { transform: translateX(0); }
+}
+@keyframes tpSlideLeftB {
+  0%,  15% { transform: translateX(100%); }
+  50%, 75% { transform: translateX(0); }
+  90%      { transform: translateX(0); }
+  100%     { transform: translateX(100%); }
+}
+
+/* ── slideRight (B enters from left) ────────────────────────────────── */
+.prev_slideRight .previewA {
+  animation: tpSlideRightA 3s ease-in-out infinite;
+}
+.prev_slideRight .previewB {
+  transform: translateX(-100%);
+  animation: tpSlideRightB 3s ease-in-out infinite;
+}
+@keyframes tpSlideRightA {
+  0%,  15% { transform: translateX(0); }
+  50%, 75% { transform: translateX(100%); }
+  90%      { transform: translateX(100%); }
+  100%     { transform: translateX(0); }
+}
+@keyframes tpSlideRightB {
+  0%,  15% { transform: translateX(-100%); }
+  50%, 75% { transform: translateX(0); }
+  90%      { transform: translateX(0); }
+  100%     { transform: translateX(-100%); }
+}
+
+/* ── slideUp (B enters from bottom) ─────────────────────────────────── */
+.prev_slideUp .previewA {
+  animation: tpSlideUpA 3s ease-in-out infinite;
+}
+.prev_slideUp .previewB {
+  transform: translateY(100%);
+  animation: tpSlideUpB 3s ease-in-out infinite;
+}
+@keyframes tpSlideUpA {
+  0%,  15% { transform: translateY(0); }
+  50%, 75% { transform: translateY(-100%); }
+  90%      { transform: translateY(-100%); }
+  100%     { transform: translateY(0); }
+}
+@keyframes tpSlideUpB {
+  0%,  15% { transform: translateY(100%); }
+  50%, 75% { transform: translateY(0); }
+  90%      { transform: translateY(0); }
+  100%     { transform: translateY(100%); }
+}
+
+/* ── slideDown (B enters from top) ──────────────────────────────────── */
+.prev_slideDown .previewA {
+  animation: tpSlideDownA 3s ease-in-out infinite;
+}
+.prev_slideDown .previewB {
+  transform: translateY(-100%);
+  animation: tpSlideDownB 3s ease-in-out infinite;
+}
+@keyframes tpSlideDownA {
+  0%,  15% { transform: translateY(0); }
+  50%, 75% { transform: translateY(100%); }
+  90%      { transform: translateY(100%); }
+  100%     { transform: translateY(0); }
+}
+@keyframes tpSlideDownB {
+  0%,  15% { transform: translateY(-100%); }
+  50%, 75% { transform: translateY(0); }
+  90%      { transform: translateY(0); }
+  100%     { transform: translateY(-100%); }
+}
+
+/* ── wipeLeft (B revealed left→right) ───────────────────────────────── */
+.prev_wipeLeft .previewB {
+  clip-path: inset(0 100% 0 0);
+  animation: tpWipeLeft 3s ease-in-out infinite;
+}
+@keyframes tpWipeLeft {
+  0%,  15% { clip-path: inset(0 100% 0 0); }
+  50%, 75% { clip-path: inset(0 0% 0 0); }
+  90%      { clip-path: inset(0 0 0 0); }
+  100%     { clip-path: inset(0 100% 0 0); }
+}
+
+/* ── wipeRight (B revealed right→left) ──────────────────────────────── */
+.prev_wipeRight .previewB {
+  clip-path: inset(0 0 0 100%);
+  animation: tpWipeRight 3s ease-in-out infinite;
+}
+@keyframes tpWipeRight {
+  0%,  15% { clip-path: inset(0 0 0 100%); }
+  50%, 75% { clip-path: inset(0 0 0 0%); }
+  90%      { clip-path: inset(0 0 0 0); }
+  100%     { clip-path: inset(0 0 0 100%); }
+}
+
+/* ── zoomIn (B zooms in while fading) ───────────────────────────────── */
+.prev_zoomIn .previewA {
+  animation: tpZoomInA 3s ease-in-out infinite;
+}
+.prev_zoomIn .previewB {
+  transform: scale(0.4);
+  opacity: 0;
+  animation: tpZoomInB 3s ease-in-out infinite;
+}
+@keyframes tpZoomInA {
+  0%,  20% { opacity: 1; }
+  45%, 70% { opacity: 0; }
+  90%      { opacity: 0; }
+  100%     { opacity: 1; }
+}
+@keyframes tpZoomInB {
+  0%,  15% { transform: scale(0.4); opacity: 0; }
+  50%, 75% { transform: scale(1);   opacity: 1; }
+  90%      { transform: scale(1);   opacity: 1; }
+  100%     { transform: scale(0.4); opacity: 0; }
+}
+
+/* ── zoomOut (B zooms out from large) ───────────────────────────────── */
+.prev_zoomOut .previewA {
+  animation: tpZoomOutA 3s ease-in-out infinite;
+}
+.prev_zoomOut .previewB {
+  transform: scale(1.6);
+  opacity: 0;
+  animation: tpZoomOutB 3s ease-in-out infinite;
+}
+@keyframes tpZoomOutA {
+  0%,  20% { opacity: 1; }
+  45%, 70% { opacity: 0; }
+  90%      { opacity: 0; }
+  100%     { opacity: 1; }
+}
+@keyframes tpZoomOutB {
+  0%,  15% { transform: scale(1.6); opacity: 0; }
+  50%, 75% { transform: scale(1);   opacity: 1; }
+  90%      { transform: scale(1);   opacity: 1; }
+  100%     { transform: scale(1.6); opacity: 0; }
+}
+
+/* ── Duration control ────────────────────────────────────────────────── */
+.durSection {
+  flex-shrink: 0;
+  padding: 10px 14px 14px;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 6px;
+}
+
+.durRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.durLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.durValue {
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--bg-elevated);
+  outline: none;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: grab;
+  box-shadow: 0 0 6px rgba(108,99,255,0.5);
+}
+.slider::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: grab;
+  border: none;
+  box-shadow: 0 0 6px rgba(108,99,255,0.5);
+}
+
+.durHints {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  font-size: 9.5px;
+  color: var(--text-muted);
+}
